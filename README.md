@@ -1,5 +1,5 @@
 # flow-account-api
-api for flow testnet address creation
+API for flow mainnet/testnet address creation
 
 
 ### /v1/address
