@@ -1,0 +1,143 @@
+definitions:
+  controllers.WalletReturn:
+    properties:
+      txId:
+        type: string
+    type: object
+  models.Wallet:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      hash_algo:
+        type: integer
+      id:
+        type: integer
+      public_key:
+        type: string
+      sign_algo:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /v1/address:
+    get:
+      consumes:
+      - application/json
+      description: Submit public key to receive accounts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: return 200 with the array of accounts.
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Wallet'
+              type: array
+            type: array
+      summary: Get accounts
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: create address use public key
+      parameters:
+      - description: public key
+        in: body
+        name: public_key
+        required: true
+        schema:
+          type: string
+      - description: weitgh
+        in: body
+        name: weight
+        required: true
+        schema:
+          type: integer
+      - description: sign algorithm
+        in: body
+        name: sign_algo
+        required: true
+        schema:
+          type: integer
+      - description: hash algorithm
+        in: body
+        name: hash_algo
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: return 200 with the transaction id.
+          schema:
+            $ref: '#/definitions/controllers.WalletReturn'
+      summary: Create an address
+      tags:
+      - user
+  /v1/address/testnet:
+    get:
+      consumes:
+      - application/json
+      description: Submit public key to receive accounts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: return 200 with the array of accounts from testnet.
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/models.Wallet'
+              type: array
+            type: array
+      summary: Get accounts
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: use public key to create address
+      parameters:
+      - description: public key
+        in: body
+        name: public_key
+        required: true
+        schema:
+          type: string
+      - description: weitgh
+        in: body
+        name: weight
+        required: true
+        schema:
+          type: integer
+      - description: sign algorithm
+        in: body
+        name: sign_algo
+        required: true
+        schema:
+          type: integer
+      - description: hash algorithm
+        in: body
+        name: hash_algo
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: return 200 with the transaction id.
+          schema:
+            $ref: '#/definitions/controllers.WalletReturn'
+      summary: Create an address
+      tags:
+      - user
+swagger: "2.0"

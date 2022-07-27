@@ -1,0 +1,220 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/v1/address": {
+            "get": {
+                "description": "Submit public key to receive accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get accounts",
+                "responses": {
+                    "200": {
+                        "description": "return 200 with the array of accounts.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/models.Wallet"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create address use public key",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create an address",
+                "parameters": [
+                    {
+                        "description": "public key",
+                        "name": "public_key",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "weitgh",
+                        "name": "weight",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "sign algorithm",
+                        "name": "sign_algo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "hash algorithm",
+                        "name": "hash_algo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return 200 with the transaction id.",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.WalletReturn"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/address/testnet": {
+            "get": {
+                "description": "Submit public key to receive accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get accounts",
+                "responses": {
+                    "200": {
+                        "description": "return 200 with the array of accounts from testnet.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/models.Wallet"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "use public key to create address",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create an address",
+                "parameters": [
+                    {
+                        "description": "public key",
+                        "name": "public_key",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "weitgh",
+                        "name": "weight",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "sign algorithm",
+                        "name": "sign_algo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "hash algorithm",
+                        "name": "hash_algo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return 200 with the transaction id.",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.WalletReturn"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.WalletReturn": {
+            "type": "object",
+            "properties": {
+                "txId": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Wallet": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "hash_algo": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "public_key": {
+                    "type": "string"
+                },
+                "sign_algo": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
