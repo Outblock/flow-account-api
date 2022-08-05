@@ -89,9 +89,9 @@ func (ctrl WalletController) GetrecordTest(c *gin.Context) {
 // @Tags         user
 // @Accept       json
 // @Produce      json
-// @Param        public_key    body     string  true  "public key"
-// @Param        sign_algo    body     string  true  "sign algorithm"
-// @Param        hash_algo    body     string  true  "hash algorithm"
+// @Param        publicKey    body     string  true  "public key"
+// @Param        signatureAlgorithm    body     string  true  "sign algorithm"
+// @Param        hashAlgorithm    body     string  true  "hash algorithm"
 // @Param        weight    body     int  true  "weight of the key"
 // @Success      200  {object}  WalletReturn "return 200 with the transaction id."
 // @Router       /v1/address [post]
@@ -174,9 +174,9 @@ func saveWalletMain(wallet *models.WalletMain, result string) error {
 // @Tags         user
 // @Accept       json
 // @Produce      json
-// @Param        public_key    body     string  true  "public key"
-// @Param        sign_algo    body     string  true  "sign algorithm"
-// @Param        hash_algo    body     string  true  "hash algorithm"
+// @Param        publicKey    body     string  true  "public key"
+// @Param        signatureAlgorithm    body     string  true  "sign algorithm"
+// @Param        hashAlgorithm    body     string  true  "hash algorithm"
 // @Param        weight    body     int  true  "weight of the key"
 // @Success      200   {object}  WalletReturn "return 200 with the transaction id."
 // @Router       /v1/address/testnet [post]

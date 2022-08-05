@@ -66,7 +66,7 @@ var doc = `{
                 "parameters": [
                     {
                         "description": "public key",
-                        "name": "public_key",
+                        "name": "publicKey",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -75,7 +75,7 @@ var doc = `{
                     },
                     {
                         "description": "sign algorithm",
-                        "name": "sign_algo",
+                        "name": "signatureAlgorithm",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -84,7 +84,7 @@ var doc = `{
                     },
                     {
                         "description": "hash algorithm",
-                        "name": "hash_algo",
+                        "name": "hashAlgorithm",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -154,7 +154,7 @@ var doc = `{
                 "parameters": [
                     {
                         "description": "public key",
-                        "name": "public_key",
+                        "name": "publicKey",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -163,7 +163,7 @@ var doc = `{
                     },
                     {
                         "description": "sign algorithm",
-                        "name": "sign_algo",
+                        "name": "signatureAlgorithm",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -172,7 +172,7 @@ var doc = `{
                     },
                     {
                         "description": "hash algorithm",
-                        "name": "hash_algo",
+                        "name": "hashAlgorithm",
                         "in": "body",
                         "required": true,
                         "schema": {

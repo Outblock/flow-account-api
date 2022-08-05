@@ -56,19 +56,19 @@ paths:
       parameters:
       - description: public key
         in: body
-        name: public_key
+        name: publicKey
         required: true
         schema:
           type: string
       - description: sign algorithm
         in: body
-        name: sign_algo
+        name: signatureAlgorithm
         required: true
         schema:
           type: string
       - description: hash algorithm
         in: body
-        name: hash_algo
+        name: hashAlgorithm
         required: true
         schema:
           type: string
@@ -114,19 +114,19 @@ paths:
       parameters:
       - description: public key
         in: body
-        name: public_key
+        name: publicKey
         required: true
         schema:
           type: string
       - description: sign algorithm
         in: body
-        name: sign_algo
+        name: signatureAlgorithm
         required: true
         schema:
           type: string
       - description: hash algorithm
         in: body
-        name: hash_algo
+        name: hashAlgorithm
         required: true
         schema:
           type: string

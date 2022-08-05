@@ -29,9 +29,9 @@ create address use public key
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| public_key | body | public key | Yes | string |
-| sign_algo | body | sign algorithm | Yes | string |
-| hash_algo | body | hash algorithm | Yes | string |
+| publicKey | body | public key | Yes | string |
+| signatureAlgorithm | body | sign algorithm | Yes | string |
+| hashAlgorithm | body | hash algorithm | Yes | string |
 | weight | body | weight of the key | Yes | integer |
 
 ##### Responses
@@ -70,9 +70,9 @@ use public key to create address
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| public_key | body | public key | Yes | string |
-| sign_algo | body | sign algorithm | Yes | string |
-| hash_algo | body | hash algorithm | Yes | string |
+| publicKey | body | public key | Yes | string |
+| signatureAlgorithm | body | sign algorithm | Yes | string |
+| hashAlgorithm | body | hash algorithm | Yes | string |
 | weight | body | weight of the key | Yes | integer |
 
 ##### Responses
