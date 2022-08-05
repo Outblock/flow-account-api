@@ -74,26 +74,26 @@ var doc = `{
                         }
                     },
                     {
-                        "description": "weitgh",
-                        "name": "weight",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
                         "description": "sign algorithm",
                         "name": "sign_algo",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     },
                     {
                         "description": "hash algorithm",
                         "name": "hash_algo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "weight of the key",
+                        "name": "weight",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -162,26 +162,26 @@ var doc = `{
                         }
                     },
                     {
-                        "description": "weitgh",
-                        "name": "weight",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
                         "description": "sign algorithm",
                         "name": "sign_algo",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     },
                     {
                         "description": "hash algorithm",
                         "name": "hash_algo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "weight of the key",
+                        "name": "weight",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -221,6 +221,9 @@ var doc = `{
                 "hash_algo": {
                     "type": "integer"
                 },
+                "hash_algo_string": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },
@@ -230,8 +233,14 @@ var doc = `{
                 "sign_algo": {
                     "type": "integer"
                 },
+                "sign_algo_string": {
+                    "type": "string"
+                },
                 "updated_at": {
                     "type": "string"
+                },
+                "weight": {
+                    "type": "integer"
                 }
             }
         }

@@ -90,8 +90,9 @@ func (ctrl WalletController) GetrecordTest(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        public_key    body     string  true  "public key"
-// @Param        sign_algo    body     int  true  "sign algorithm"
-// @Param        hash_algo    body     int  true  "hash algorithm"
+// @Param        sign_algo    body     string  true  "sign algorithm"
+// @Param        hash_algo    body     string  true  "hash algorithm"
+// @Param        weight    body     int  true  "weight of the key"
 // @Success      200  {object}  WalletReturn "return 200 with the transaction id."
 // @Router       /v1/address [post]
 func (ctrl WalletController) CreateAddress(c *gin.Context) {
@@ -131,7 +132,7 @@ func (ctrl WalletController) CreateAddress(c *gin.Context) {
 //Create flow account
 func createAccountMain(wallet *models.WalletMain, c *gin.Context) flow.Identifier {
 
-	txMain := config.CreateFlowKey(wallet.HashAlgo, wallet.SignAlgo, wallet.PublicKey, "mainnet", c)
+	txMain := config.CreateFlowKey(wallet.HashAlgoString, wallet.SignAlgoString, wallet.PublicKey, wallet.Weight, "mainnet", c)
 	txidMain := txMain.ID()
 
 	go generateWalletMain(txidMain, wallet)
@@ -174,8 +175,9 @@ func saveWalletMain(wallet *models.WalletMain, result string) error {
 // @Accept       json
 // @Produce      json
 // @Param        public_key    body     string  true  "public key"
-// @Param        sign_algo    body     int  true  "sign algorithm"
-// @Param        hash_algo    body     int  true  "hash algorithm"
+// @Param        sign_algo    body     string  true  "sign algorithm"
+// @Param        hash_algo    body     string  true  "hash algorithm"
+// @Param        weight    body     int  true  "weight of the key"
 // @Success      200   {object}  WalletReturn "return 200 with the transaction id."
 // @Router       /v1/address/testnet [post]
 func (ctrl WalletController) CreateAddressTest(c *gin.Context) {
@@ -214,7 +216,7 @@ func (ctrl WalletController) CreateAddressTest(c *gin.Context) {
 
 func createAccountTest(wallet *models.Wallet, c *gin.Context) flow.Identifier {
 
-	tx := config.CreateFlowKey(wallet.HashAlgo, wallet.SignAlgo, wallet.PublicKey, "testnet", c)
+	tx := config.CreateFlowKey(wallet.HashAlgoString, wallet.SignAlgoString, wallet.PublicKey, wallet.Weight, "testnet", c)
 	txid := tx.ID()
 
 	go generateWalletTest(txid, wallet)

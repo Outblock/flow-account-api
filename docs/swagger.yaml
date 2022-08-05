@@ -12,14 +12,20 @@ definitions:
         type: string
       hash_algo:
         type: integer
+      hash_algo_string:
+        type: string
       id:
         type: integer
       public_key:
         type: string
       sign_algo:
         type: integer
+      sign_algo_string:
+        type: string
       updated_at:
         type: string
+      weight:
+        type: integer
     type: object
 info:
   contact: {}
@@ -54,21 +60,21 @@ paths:
         required: true
         schema:
           type: string
-      - description: weitgh
-        in: body
-        name: weight
-        required: true
-        schema:
-          type: integer
       - description: sign algorithm
         in: body
         name: sign_algo
         required: true
         schema:
-          type: integer
+          type: string
       - description: hash algorithm
         in: body
         name: hash_algo
+        required: true
+        schema:
+          type: string
+      - description: weight of the key
+        in: body
+        name: weight
         required: true
         schema:
           type: integer
@@ -112,21 +118,21 @@ paths:
         required: true
         schema:
           type: string
-      - description: weitgh
-        in: body
-        name: weight
-        required: true
-        schema:
-          type: integer
       - description: sign algorithm
         in: body
         name: sign_algo
         required: true
         schema:
-          type: integer
+          type: string
       - description: hash algorithm
         in: body
         name: hash_algo
+        required: true
+        schema:
+          type: string
+      - description: weight of the key
+        in: body
+        name: weight
         required: true
         schema:
           type: integer

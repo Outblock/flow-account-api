@@ -20,6 +20,7 @@ func Flow(network string) string {
 	}
 }
 
+
 func FlowKey(network string) (string, string, int) {
 	switch network {
 	case "testnet":

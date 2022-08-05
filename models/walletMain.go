@@ -10,13 +10,16 @@ import (
 )
 
 type WalletMain struct {
-	ID        int64     `pg:"id, primarykey, autoincrement" json:"id"`
-	PublicKey string    `json:"public_key"`
-	Address   string    `json:"address"`
-	HashAlgo  int       `json:"hash_algo"`
-	SignAlgo  int       `json:"sign_algo"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID             int64     `pg:"id, primarykey, autoincrement" json:"id"`
+	PublicKey      string    `json:"public_key"`
+	Address        string    `json:"address"`
+	HashAlgo       int       `json:"hash_algo"`
+	SignAlgo       int       `json:"sign_algo"`
+	Weight         int       `json:"weight"`
+	HashAlgoString string    `json:"hash_algo_string"`
+	SignAlgoString string    `json:"sign_algo_string"`
+	CreatedAt      time.Time `json:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at"`
 }
 type WalletModelMain struct{}
 
@@ -37,11 +40,12 @@ func CreateWalletTableMain(db *pg.DB) error {
 func (m WalletModelMain) CreateWallet(reqData forms.AccountForm) (int64, error) {
 
 	walletModel := &WalletMain{
-		PublicKey: reqData.PublicKey,
-		HashAlgo:  reqData.HashAlgo,
-		SignAlgo:  reqData.SignAlgo,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		PublicKey:      reqData.PublicKey,
+		HashAlgoString: reqData.HashAlgo,
+		SignAlgoString: reqData.SignAlgo,
+		Weight:         reqData.Weight,
+		CreatedAt:      time.Now(),
+		UpdatedAt:      time.Now(),
 	}
 	insertError := DbConnect.Insert(walletModel)
 

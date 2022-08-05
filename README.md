@@ -2,6 +2,7 @@
 API for flow mainnet/testnet address creation
 
 
+
 ### /v1/address
 
 #### GET
@@ -33,9 +34,9 @@ create address use public key
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | public_key | body | public key | Yes | string |
-| weight | body | weitgh | Yes | integer |
-| sign_algo | body | sign algorithm | Yes | integer |
-| hash_algo | body | hash algorithm | Yes | integer |
+| sign_algo | body | sign algorithm | Yes | string |
+| hash_algo | body | hash algorithm | Yes | string |
+| weight | body | weight of the key | Yes | integer |
 
 ##### Responses
 
@@ -74,9 +75,9 @@ use public key to create address
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | public_key | body | public key | Yes | string |
-| weight | body | weitgh | Yes | integer |
-| sign_algo | body | sign algorithm | Yes | integer |
-| hash_algo | body | hash algorithm | Yes | integer |
+| sign_algo | body | sign algorithm | Yes | string |
+| hash_algo | body | hash algorithm | Yes | string |
+| weight | body | weight of the key | Yes | integer |
 
 ##### Responses
 
@@ -99,7 +100,10 @@ use public key to create address
 | address | string |  | No |
 | created_at | string |  | No |
 | hash_algo | integer |  | No |
+| hash_algo_string | string |  | No |
 | id | integer |  | No |
 | public_key | string |  | No |
 | sign_algo | integer |  | No |
+| sign_algo_string | string |  | No |
 | updated_at | string |  | No |
+| weight | integer |  | No |

@@ -21,12 +21,9 @@ type Wallet struct {
 
 type Identifier [32]byte
 
-func CreateFlowKey(hashAlgo int, signAlgo int, publicKey string, network string, c *gin.Context) *flow.Transaction {
+func CreateFlowKey(hashAlgo string, signAlgo string, publicKey string, weight int, network string, c *gin.Context) *flow.Transaction {
 
 	node := Flow(network)
-
-	sigAlgoName := "ECDSA_secp256k1"
-	hashAlgoName := "SHA2_256"
 
 	serviceAddressHex, servicePrivKeyHex, keyIndex := GetKey(network, c)
 	serviceSigAlgoHex := "ECDSA_P256"
@@ -35,7 +32,7 @@ func CreateFlowKey(hashAlgo int, signAlgo int, publicKey string, network string,
 
 	gasLimit := uint64(100)
 
-	tx := CreateAccount(node, publicKey, sigAlgoName, hashAlgoName, serviceAddressHex, servicePrivKeyHex, serviceSigAlgoHex, gasLimit, keyIndex)
+	tx := CreateAccount(node, publicKey, signAlgo, hashAlgo, serviceAddressHex, servicePrivKeyHex, serviceSigAlgoHex, gasLimit, keyIndex, weight)
 
 	return tx
 }
@@ -48,7 +45,8 @@ func CreateAccount(node string,
 	servicePrivKeyHex string,
 	serviceSigAlgoName string,
 	gasLimit uint64,
-	keyIndex int64) *flow.Transaction {
+	keyIndex int64,
+	weight int) *flow.Transaction {
 
 	ctx := context.Background()
 
@@ -67,7 +65,7 @@ func CreateAccount(node string,
 		SetPublicKey(publicKey).
 		SetSigAlgo(sigAlgo).
 		SetHashAlgo(hashAlgo).
-		SetWeight(flow.AccountKeyWeightThreshold)
+		SetWeight(weight)
 
 	c, err := client.New(node, grpc.WithInsecure())
 	if err != nil {
