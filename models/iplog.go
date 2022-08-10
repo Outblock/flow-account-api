@@ -11,6 +11,7 @@ import (
 type IpLog struct {
 	ID        int64     `pg:"id, primarykey, autoincrement" json:"id"`
 	Ip        string    `json:"ip"`
+	Count     int       `json:"count"`
 	SavedTime time.Time `json:"saved_time"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
@@ -36,6 +37,7 @@ func (m IpLogModel) CreateIpLog(address string) (*IpLog, error) {
 
 	ipLogModel := &IpLog{
 		Ip:        address,
+		Count:     1,
 		SavedTime: time.Now(),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),

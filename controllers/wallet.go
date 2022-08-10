@@ -99,21 +99,25 @@ func (ctrl WalletController) GetrecordTest(c *gin.Context) {
 // @Success      200  {object}  WalletReturn "return 200 with the transaction id."
 // @Router       /v1/address [post]
 func (ctrl WalletController) CreateAddress(c *gin.Context) {
-
+	// check registered ip
 	ip := c.ClientIP()
 	ipLog, ipLogErr := ipLogModel.SelectCustom("ip", ip)
 	if ipLogErr != nil && ipLog.ID == 0 {
 		ipLog, _ = ipLogModel.CreateIpLog(ip)
 	} else {
-		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 1))) {
-			fmt.Printf("Too many request")
+		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
+			fmt.Printf("The HTTP request failed with error")
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"status":  http.StatusInternalServerError,
 				"message": "Query failed",
 			})
 			return
-		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 1))) {
+		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
 			ipLog.SavedTime = time.Now()
+			ipLog.Count = 1
+		} else {
+			count := ipLog.Count
+			ipLog.Count = count + 1
 		}
 		ipLogModel.Update(ipLog)
 	}
@@ -202,6 +206,28 @@ func saveWalletMain(wallet *models.WalletMain, result string) error {
 // @Success      200   {object}  WalletReturn "return 200 with the transaction id."
 // @Router       /v1/address/testnet [post]
 func (ctrl WalletController) CreateAddressTest(c *gin.Context) {
+	// check registered ip
+	ip := c.ClientIP()
+	ipLog, ipLogErr := ipLogModel.SelectCustom("ip", ip)
+	if ipLogErr != nil && ipLog.ID == 0 {
+		ipLog, _ = ipLogModel.CreateIpLog(ip)
+	} else {
+		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
+			fmt.Printf("The HTTP request failed with error")
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"status":  http.StatusInternalServerError,
+				"message": "Query failed",
+			})
+			return
+		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
+			ipLog.SavedTime = time.Now()
+			ipLog.Count = 1
+		} else {
+			count := ipLog.Count
+			ipLog.Count = count + 1
+		}
+		ipLogModel.Update(ipLog)
+	}
 	var accountForm forms.AccountForm
 
 	if validationErr := c.ShouldBindJSON(&accountForm); validationErr != nil {
