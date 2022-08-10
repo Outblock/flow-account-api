@@ -27,6 +27,7 @@ func Connect() *pg.DB {
 	InitiateDB(db)
 	CreateWalletTableMain(db)
 	CreateActiveindexTable(db)
+	CreateIpLogTable(db)
 	return db
 }
 

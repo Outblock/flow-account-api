@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/onflow/flow-go-sdk"
@@ -16,6 +18,7 @@ type WalletController struct{}
 
 var walletModel = new(models.WalletModel)
 var walletModelMain = new(models.WalletModelMain)
+var ipLogModel = new(models.IpLogModel)
 
 type WalletReturn struct {
 	TxId string `json:"txId"`
@@ -96,6 +99,24 @@ func (ctrl WalletController) GetrecordTest(c *gin.Context) {
 // @Success      200  {object}  WalletReturn "return 200 with the transaction id."
 // @Router       /v1/address [post]
 func (ctrl WalletController) CreateAddress(c *gin.Context) {
+
+	ip := c.ClientIP()
+	ipLog, ipLogErr := ipLogModel.SelectCustom("ip", ip)
+	if ipLogErr != nil && ipLog.ID == 0 {
+		ipLog, _ = ipLogModel.CreateIpLog(ip)
+	} else {
+		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 1))) {
+			fmt.Printf("Too many request")
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"status":  http.StatusInternalServerError,
+				"message": "Query failed",
+			})
+			return
+		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 1))) {
+			ipLog.SavedTime = time.Now()
+		}
+		ipLogModel.Update(ipLog)
+	}
 	var accountForm forms.AccountForm
 	if validationErr := c.ShouldBindJSON(&accountForm); validationErr != nil {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{"message": "validation error"})
