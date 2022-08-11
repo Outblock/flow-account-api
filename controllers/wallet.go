@@ -1,10 +1,8 @@
 package controllers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/onflow/flow-go-sdk"
@@ -100,27 +98,27 @@ func (ctrl WalletController) GetrecordTest(c *gin.Context) {
 // @Router       /v1/address [post]
 func (ctrl WalletController) CreateAddress(c *gin.Context) {
 	// check registered ip
-	ip := c.ClientIP()
-	ipLog, ipLogErr := ipLogModel.SelectCustom("ip", ip)
-	if ipLogErr != nil && ipLog.ID == 0 {
-		ipLog, _ = ipLogModel.CreateIpLog(ip)
-	} else {
-		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
-			fmt.Printf("The HTTP request failed with error")
-			c.JSON(429, gin.H{
-				"status":  429,
-				"message": "Temporary registration limit exceeded, please try again later",
-			})
-			return
-		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
-			ipLog.SavedTime = time.Now()
-			ipLog.Count = 1
-		} else {
-			count := ipLog.Count
-			ipLog.Count = count + 1
-		}
-		ipLogModel.Update(ipLog)
-	}
+	// ip := c.ClientIP()
+	// ipLog, ipLogErr := ipLogModel.SelectCustom("ip", ip)
+	// if ipLogErr != nil && ipLog.ID == 0 {
+	// 	ipLog, _ = ipLogModel.CreateIpLog(ip)
+	// } else {
+	// 	if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
+	// 		fmt.Printf("The HTTP request failed with error")
+	// 		c.JSON(429, gin.H{
+	// 			"status":  429,
+	// 			"message": "Temporary registration limit exceeded, please try again later",
+	// 		})
+	// 		return
+	// 	} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
+	// 		ipLog.SavedTime = time.Now()
+	// 		ipLog.Count = 1
+	// 	} else {
+	// 		count := ipLog.Count
+	// 		ipLog.Count = count + 1
+	// 	}
+	// 	ipLogModel.Update(ipLog)
+	// }
 	var accountForm forms.AccountForm
 	if validationErr := c.ShouldBindJSON(&accountForm); validationErr != nil {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, gin.H{"message": "validation error"})
@@ -207,27 +205,27 @@ func saveWalletMain(wallet *models.WalletMain, result string) error {
 // @Router       /v1/address/testnet [post]
 func (ctrl WalletController) CreateAddressTest(c *gin.Context) {
 	// check registered ip
-	ip := c.ClientIP()
-	ipLog, ipLogErr := ipLogModel.SelectCustom("ip", ip)
-	if ipLogErr != nil && ipLog.ID == 0 {
-		ipLog, _ = ipLogModel.CreateIpLog(ip)
-	} else {
-		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
-			fmt.Printf("The HTTP request failed with error")
-			c.JSON(429, gin.H{
-				"status":  429,
-				"message": "Temporary registration limit exceeded, please try again later",
-			})
-			return
-		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
-			ipLog.SavedTime = time.Now()
-			ipLog.Count = 1
-		} else {
-			count := ipLog.Count
-			ipLog.Count = count + 1
-		}
-		ipLogModel.Update(ipLog)
-	}
+	// ip := c.ClientIP()
+	// ipLog, ipLogErr := ipLogModel.SelectCustom("ip", ip)
+	// if ipLogErr != nil && ipLog.ID == 0 {
+	// 	ipLog, _ = ipLogModel.CreateIpLog(ip)
+	// } else {
+	// 	if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
+	// 		fmt.Printf("The HTTP request failed with error")
+	// 		c.JSON(429, gin.H{
+	// 			"status":  429,
+	// 			"message": "Temporary registration limit exceeded, please try again later",
+	// 		})
+	// 		return
+	// 	} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
+	// 		ipLog.SavedTime = time.Now()
+	// 		ipLog.Count = 1
+	// 	} else {
+	// 		count := ipLog.Count
+	// 		ipLog.Count = count + 1
+	// 	}
+	// 	ipLogModel.Update(ipLog)
+	// }
 	var accountForm forms.AccountForm
 
 	if validationErr := c.ShouldBindJSON(&accountForm); validationErr != nil {
