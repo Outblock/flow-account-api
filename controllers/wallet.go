@@ -107,9 +107,9 @@ func (ctrl WalletController) CreateAddress(c *gin.Context) {
 	} else {
 		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
 			fmt.Printf("The HTTP request failed with error")
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"status":  http.StatusInternalServerError,
-				"message": "Query failed",
+			c.JSON(429, gin.H{
+				"status":  429,
+				"message": "Temporary registration limit exceeded, please try again later",
 			})
 			return
 		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
@@ -214,9 +214,9 @@ func (ctrl WalletController) CreateAddressTest(c *gin.Context) {
 	} else {
 		if ipLog.SavedTime.After(time.Now().Add(-(time.Minute * 10))) && ipLog.Count > 5 {
 			fmt.Printf("The HTTP request failed with error")
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"status":  http.StatusInternalServerError,
-				"message": "Query failed",
+			c.JSON(429, gin.H{
+				"status":  429,
+				"message": "Temporary registration limit exceeded, please try again later",
 			})
 			return
 		} else if ipLog.SavedTime.Before(time.Now().Add(-(time.Minute * 10))) {
